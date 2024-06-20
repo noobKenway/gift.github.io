@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你的老婆是？</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        img {
+            width: auto;
+            height: 500px;
+            display: none;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>你的老婆是：</h1>
+    <img id="wifeImage" src="" alt="随机图片">
+    <button id="toggleButton" onclick="toggleImageSlideshow()">开始</button>
+
+    <script>
+        const images = [
+            '1.jpg', 
+            '2.jpeg',
+            '3.jpg',
+            '4.jpg',
+			'5.jpg',
+			'6.jpg',
+			'7.png',
+			'8.jpg',
+        ];
+        let intervalId = null;
+        let currentIndex = 0;
+		
+        function toggleImageSlideshow() {
+            const button = document.getElementById('toggleButton');
+            const imgElement = document.getElementById('wifeImage');
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+                button.textContent = '开始';
+            } else {
+                button.textContent = '暂停';
+                imgElement.style.display = 'block';
+                intervalId = setInterval(() => {
+                    currentIndex = Math.floor(Math.random() * images.length);
+                    imgElement.src = images[currentIndex];
+                }, 100);
+            }
+        }
+    </script>
+</body>
+</html>
